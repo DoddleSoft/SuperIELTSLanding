@@ -90,6 +90,13 @@
   --animate-backdrop-blur-in: backdrop-blur-in 0.3s ease-out;
 }
 
+.orbit-paused,
+.orbit-paused *,
+.orbit-paused[class*="animate-"],
+.orbit-paused [class*="animate-"] {
+  animation-play-state: paused !important;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #ffffff; /* Force light mode for this specific design as per image */

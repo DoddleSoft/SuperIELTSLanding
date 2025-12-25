@@ -1,8 +1,14 @@
 'use client';
 
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Home() {
+  const [isAnyCardHovered, setIsAnyCardHovered] = useState(false);
+
+  const handleCardHover = (isHovered: boolean) => {
+    setIsAnyCardHovered(isHovered);
+  };
   return (
     <div className="relative min-h-screen w-full overflow-hidden" style={{
       background: 'radial-gradient(ellipse at center top, rgba(239, 68, 68, 0.03) 0%, rgba(240, 253, 244, 0.6) 50%, rgba(249, 250, 251, 0.9) 100%)'
@@ -12,13 +18,12 @@ export default function Home() {
         background: 'conic-gradient(from 45deg at 50% 50%, rgba(239, 68, 68, 0.02) 0deg, rgba(16, 185, 129, 0.02) 120deg, rgba(99, 102, 241, 0.02) 240deg, rgba(239, 68, 68, 0.02) 360deg)'
       }}></div>
       {/* Premium Background Concentric Circles & Orbiting Features */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
         
         {/* Inner Circle - Enhanced with glassmorphism */}
         <div className="absolute w-[800px] h-[800px] rounded-full" style={{
           border: '1px solid rgba(239, 68, 68, 0.1)',
-          background: 'radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%)',
-          backdropFilter: 'blur(1px)'
+          background: 'radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%)'
         }}></div>
 
         {/* Middle Circle - Premium styling for feature cards */}
@@ -27,9 +32,12 @@ export default function Home() {
           background: 'radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%)'
         }}>
           {/* All 4 Modules - Premium Enhanced */}
-          <div className="absolute inset-0 animate-[orbit_60s_linear_infinite]" style={{ animationDelay: '-0s' }}>
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[orbit_60s_linear_infinite_reverse]" style={{ animationDelay: '-0s' }}>
-              <div className="group flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-500 hover:scale-105" style={{
+          <div className="absolute inset-0 animate-[orbit_60s_linear_infinite]" style={{ animationDelay: '-0s', animationPlayState: isAnyCardHovered ? 'paused' : 'running' }}>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[orbit_60s_linear_infinite_reverse]" style={{ animationDelay: '-0s', animationPlayState: isAnyCardHovered ? 'paused' : 'running' }}>
+              <div className="group flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-500 hover:scale-105 pointer-events-auto" 
+                   onMouseEnter={() => handleCardHover(true)}
+                   onMouseLeave={() => handleCardHover(false)}
+                   style={{
                 background: 'rgba(255, 255, 255, 0.9)',
                 backdropFilter: 'blur(20px)',
                 border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -56,9 +64,12 @@ export default function Home() {
           </div>
           
           {/* Analytics - Premium Enhanced */}
-          <div className="absolute inset-0 animate-[orbit_60s_linear_infinite]" style={{ animationDelay: '-15s' }}>
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[orbit_60s_linear_infinite_reverse]" style={{ animationDelay: '-15s' }}>
-              <div className="group flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-500 hover:scale-105" style={{
+          <div className="absolute inset-0 animate-[orbit_60s_linear_infinite]" style={{ animationDelay: '-15s', animationPlayState: isAnyCardHovered ? 'paused' : 'running' }}>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[orbit_60s_linear_infinite_reverse]" style={{ animationDelay: '-15s', animationPlayState: isAnyCardHovered ? 'paused' : 'running' }}>
+              <div className="group flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-500 hover:scale-105 pointer-events-auto" 
+                   onMouseEnter={() => handleCardHover(true)}
+                   onMouseLeave={() => handleCardHover(false)}
+                   style={{
                 background: 'rgba(255, 255, 255, 0.9)',
                 backdropFilter: 'blur(20px)',
                 border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -84,9 +95,12 @@ export default function Home() {
           </div>
           
           {/* AI Insights - Premium Enhanced */}
-          <div className="absolute inset-0 animate-[orbit_60s_linear_infinite]" style={{ animationDelay: '-30s' }}>
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[orbit_60s_linear_infinite_reverse]" style={{ animationDelay: '-30s' }}>
-              <div className="group flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-500 hover:scale-105" style={{
+          <div className="absolute inset-0 animate-[orbit_60s_linear_infinite]" style={{ animationDelay: '-30s', animationPlayState: isAnyCardHovered ? 'paused' : 'running' }}>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[orbit_60s_linear_infinite_reverse]" style={{ animationDelay: '-30s', animationPlayState: isAnyCardHovered ? 'paused' : 'running' }}>
+              <div className="group flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-500 hover:scale-105 pointer-events-auto" 
+                   onMouseEnter={() => handleCardHover(true)}
+                   onMouseLeave={() => handleCardHover(false)}
+                   style={{
                 background: 'rgba(255, 255, 255, 0.9)',
                 backdropFilter: 'blur(20px)',
                 border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -110,9 +124,12 @@ export default function Home() {
           </div>
           
           {/* Performance Tracking - Premium Enhanced */}
-          <div className="absolute inset-0 animate-[orbit_60s_linear_infinite]" style={{ animationDelay: '-45s' }}>
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[orbit_60s_linear_infinite_reverse]" style={{ animationDelay: '-45s' }}>
-              <div className="group flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-500 hover:scale-105" style={{
+          <div className="absolute inset-0 animate-[orbit_60s_linear_infinite]" style={{ animationDelay: '-45s', animationPlayState: isAnyCardHovered ? 'paused' : 'running' }}>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[orbit_60s_linear_infinite_reverse]" style={{ animationDelay: '-45s', animationPlayState: isAnyCardHovered ? 'paused' : 'running' }}>
+              <div className="group flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-500 hover:scale-105 pointer-events-auto" 
+                   onMouseEnter={() => handleCardHover(true)}
+                   onMouseLeave={() => handleCardHover(false)}
+                   style={{
                 background: 'rgba(255, 255, 255, 0.9)',
                 backdropFilter: 'blur(20px)',
                 border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -139,9 +156,12 @@ export default function Home() {
           </div>
           
           {/* Mock Tests - Premium Enhanced */}
-          <div className="absolute inset-0 animate-[orbit_60s_linear_infinite]" style={{ animationDelay: '-54s' }}>
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[orbit_60s_linear_infinite_reverse]" style={{ animationDelay: '-54s' }}>
-              <div className="group flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-500 hover:scale-105" style={{
+          <div className="absolute inset-0 animate-[orbit_60s_linear_infinite]" style={{ animationDelay: '-54s', animationPlayState: isAnyCardHovered ? 'paused' : 'running' }}>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[orbit_60s_linear_infinite_reverse]" style={{ animationDelay: '-54s', animationPlayState: isAnyCardHovered ? 'paused' : 'running' }}>
+              <div className="group flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-500 hover:scale-105 pointer-events-auto" 
+                   onMouseEnter={() => handleCardHover(true)}
+                   onMouseLeave={() => handleCardHover(false)}
+                   style={{
                 background: 'rgba(255, 255, 255, 0.9)',
                 backdropFilter: 'blur(20px)',
                 border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -217,7 +237,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto space-y-8 animate-fade-in-up">
           {/* Premium Headline with enhanced typography */}
           <div className="space-y-3">
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-none" style={{ 
+            <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-none transition-all duration-500 hover:scale-105 cursor-pointer" style={{ 
               fontFamily: 'var(--font-poppins)',
               background: 'linear-gradient(135deg, #111827 0%, #374151 50%, #111827 100%)',
               WebkitBackgroundClip: 'text',
@@ -311,10 +331,6 @@ export default function Home() {
                   </svg>
                 </div>
               </button>
-              
-              <p className="text-xs text-center opacity-60 mt-3" style={{ color: '#6b7280' }}>
-                ✨ Exclusive early access • No spam, ever
-              </p>
             </div>
           </div>
         </div>
