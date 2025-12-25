@@ -52,7 +52,7 @@ export default function CustomCursor() {
     if (target && target.nodeType === Node.ELEMENT_NODE) {
       const element = target as Element;
       if (element.matches && element.matches(
-        'a, button, [role="button"], input, textarea, select, .hoverable, [onclick], [data-cursor="hover"]'
+        'a, button, [role="button"], input, textarea, select, .hoverable, [onclick], [data-cursor="hover"], .group'
       )) {
         setIsHovering(true);
       }
@@ -64,7 +64,7 @@ export default function CustomCursor() {
     if (target && target.nodeType === Node.ELEMENT_NODE) {
       const element = target as Element;
       if (element.matches && element.matches(
-        'a, button, [role="button"], input, textarea, select, .hoverable, [onclick], [data-cursor="hover"]'
+        'a, button, [role="button"], input, textarea, select, .hoverable, [onclick], [data-cursor="hover"], .group'
       )) {
         setIsHovering(false);
       }
