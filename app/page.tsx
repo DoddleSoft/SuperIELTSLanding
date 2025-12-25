@@ -2,12 +2,200 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import FeatureModal, { Feature } from "./components/FeatureModal";
 
 export default function Home() {
   const [isAnyCardHovered, setIsAnyCardHovered] = useState(false);
+  const [selectedFeature, setSelectedFeature] = useState<Feature | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const features: Feature[] = [
+    {
+      id: 'all-modules',
+      name: 'All 4 Modules',
+      icon: (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+      ),
+      gradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+      shadowColor: 'rgba(16, 185, 129, 0.3)',
+      color: '#10b981',
+      description: 'Complete IELTS test preparation covering all four essential modules',
+      benefits: [
+        'Comprehensive coverage of Reading, Writing, Listening, and Speaking modules',
+        'Integrated practice sessions that mirror the actual IELTS exam format',
+        'Seamless transition between different test sections for authentic experience',
+        'Synchronized scoring and feedback across all modules for holistic improvement'
+      ],
+      stats: [
+        { label: 'Test Modules', value: '4' },
+        { label: 'Practice Tests', value: '50+' },
+        { label: 'Success Rate', value: '95%' }
+      ],
+      features: [
+        'Reading comprehension with authentic texts',
+        'Academic & General Writing tasks',
+        'Listening tests with native speakers',
+        'Speaking practice with AI feedback',
+        'Module-specific tips and strategies',
+        'Cross-module performance analytics'
+      ]
+    },
+    {
+      id: 'analytics',
+      name: 'Analytics',
+      icon: (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"></line>
+          <line x1="12" y1="20" x2="12" y2="4"></line>
+          <line x1="6" y1="20" x2="6" y2="14"></line>
+        </svg>
+      ),
+      gradient: 'linear-gradient(135deg, #f97316 0%, #ea580c 100%)',
+      shadowColor: 'rgba(249, 115, 22, 0.3)',
+      color: '#f97316',
+      description: 'Deep insights into student performance and learning patterns',
+      benefits: [
+        'Real-time performance tracking across all test sections',
+        'Detailed breakdown of strengths and areas for improvement',
+        'Comparative analysis with other students and target band scores',
+        'Predictive insights to forecast final IELTS scores'
+      ],
+      stats: [
+        { label: 'Data Points', value: '1000+' },
+        { label: 'Accuracy', value: '98%' },
+        { label: 'Reports', value: '25+' }
+      ],
+      features: [
+        'Real-time performance dashboards',
+        'Detailed score breakdowns',
+        'Progress tracking over time',
+        'Comparative performance analysis',
+        'Weakness identification system',
+        'Custom report generation'
+      ]
+    },
+    {
+      id: 'ai-insights',
+      name: 'AI Insights',
+      icon: (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 18 18.5a3 3 0 1 1-6 0c0-.59.212-1.133.566-1.553l-.566-.547z"></path>
+        </svg>
+      ),
+      gradient: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
+      shadowColor: 'rgba(139, 92, 246, 0.3)',
+      color: '#8b5cf6',
+      description: 'Intelligent recommendations powered by advanced AI algorithms',
+      benefits: [
+        'Personalized study plans based on individual learning patterns',
+        'AI-powered error analysis and targeted improvement suggestions',
+        'Smart content recommendations aligned with student goals',
+        'Adaptive testing that adjusts difficulty based on performance'
+      ],
+      stats: [
+        { label: 'AI Models', value: '12' },
+        { label: 'Predictions', value: '99.2%' },
+        { label: 'Improvements', value: '+2.1 Bands' }
+      ],
+      features: [
+        'Personalized learning pathways',
+        'Intelligent error pattern recognition',
+        'Adaptive question difficulty',
+        'Smart content recommendations',
+        'Predictive score modeling',
+        'Automated study planning'
+      ]
+    },
+    {
+      id: 'performance-tracking',
+      name: 'Performance Tracking',
+      icon: (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 3v5h5"></path>
+          <path d="M21 21v-5h-5"></path>
+          <path d="M21 3l-7 7m-4-4l7 7"></path>
+          <path d="M3 21l7-7m4 4l-7-7"></path>
+        </svg>
+      ),
+      gradient: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+      shadowColor: 'rgba(99, 102, 241, 0.3)',
+      color: '#6366f1',
+      description: 'Comprehensive monitoring of student progress and achievements',
+      benefits: [
+        'Detailed tracking of performance across multiple practice sessions',
+        'Historical data analysis showing improvement trends over time',
+        'Goal setting and milestone tracking for target band scores',
+        'Comprehensive reporting for students, teachers, and administrators'
+      ],
+      stats: [
+        { label: 'Metrics Tracked', value: '50+' },
+        { label: 'Progress Updates', value: 'Real-time' },
+        { label: 'Retention Rate', value: '94%' }
+      ],
+      features: [
+        'Comprehensive progress monitoring',
+        'Historical performance analysis',
+        'Goal tracking and milestones',
+        'Multi-level reporting system',
+        'Achievement badges and rewards',
+        'Progress visualization tools'
+      ]
+    },
+    {
+      id: 'mock-tests',
+      name: 'Mock Tests',
+      icon: (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14,2 14,8 20,8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10,9 9,9 8,9"></polyline>
+        </svg>
+      ),
+      gradient: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+      shadowColor: 'rgba(59, 130, 246, 0.3)',
+      color: '#3b82f6',
+      description: 'Authentic IELTS mock tests that replicate the real exam experience',
+      benefits: [
+        'Full-length practice tests that match official IELTS format and timing',
+        'Variety of test versions to prevent memorization and ensure thorough practice',
+        'Immediate scoring and detailed feedback after each test completion',
+        'Timed sections that help students develop proper exam pacing strategies'
+      ],
+      stats: [
+        { label: 'Mock Tests', value: '100+' },
+        { label: 'Question Bank', value: '5000+' },
+        { label: 'Accuracy Rate', value: '97%' }
+      ],
+      features: [
+        'Full-length practice tests',
+        'Official exam format simulation',
+        'Timed test sections',
+        'Instant scoring and feedback',
+        'Multiple test versions',
+        'Exam strategy guidance'
+      ]
+    }
+  ];
 
   const handleCardHover = (isHovered: boolean) => {
     setIsAnyCardHovered(isHovered);
+  };
+
+  const handleFeatureClick = (feature: Feature) => {
+    setSelectedFeature(feature);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedFeature(null), 300);
   };
   return (
     <div className="relative min-h-screen w-full overflow-hidden" style={{
@@ -34,9 +222,10 @@ export default function Home() {
           {/* All 4 Modules - Premium Enhanced */}
           <div className="absolute inset-0 animate-[orbit_60s_linear_infinite]" style={{ animationDelay: '-0s', animationPlayState: isAnyCardHovered ? 'paused' : 'running' }}>
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[orbit_60s_linear_infinite_reverse]" style={{ animationDelay: '-0s', animationPlayState: isAnyCardHovered ? 'paused' : 'running' }}>
-              <div className="group flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-500 hover:scale-105 pointer-events-auto" 
+              <div className="group flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-500 hover:scale-105 pointer-events-auto cursor-pointer" 
                    onMouseEnter={() => handleCardHover(true)}
                    onMouseLeave={() => handleCardHover(false)}
+                   onClick={() => handleFeatureClick(features[0])}
                    style={{
                 background: 'rgba(255, 255, 255, 0.9)',
                 backdropFilter: 'blur(20px)',
@@ -66,9 +255,10 @@ export default function Home() {
           {/* Analytics - Premium Enhanced */}
           <div className="absolute inset-0 animate-[orbit_60s_linear_infinite]" style={{ animationDelay: '-15s', animationPlayState: isAnyCardHovered ? 'paused' : 'running' }}>
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[orbit_60s_linear_infinite_reverse]" style={{ animationDelay: '-15s', animationPlayState: isAnyCardHovered ? 'paused' : 'running' }}>
-              <div className="group flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-500 hover:scale-105 pointer-events-auto" 
+              <div className="group flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-500 hover:scale-105 pointer-events-auto cursor-pointer" 
                    onMouseEnter={() => handleCardHover(true)}
                    onMouseLeave={() => handleCardHover(false)}
+                   onClick={() => handleFeatureClick(features[1])}
                    style={{
                 background: 'rgba(255, 255, 255, 0.9)',
                 backdropFilter: 'blur(20px)',
@@ -97,9 +287,10 @@ export default function Home() {
           {/* AI Insights - Premium Enhanced */}
           <div className="absolute inset-0 animate-[orbit_60s_linear_infinite]" style={{ animationDelay: '-30s', animationPlayState: isAnyCardHovered ? 'paused' : 'running' }}>
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[orbit_60s_linear_infinite_reverse]" style={{ animationDelay: '-30s', animationPlayState: isAnyCardHovered ? 'paused' : 'running' }}>
-              <div className="group flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-500 hover:scale-105 pointer-events-auto" 
+              <div className="group flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-500 hover:scale-105 pointer-events-auto cursor-pointer" 
                    onMouseEnter={() => handleCardHover(true)}
                    onMouseLeave={() => handleCardHover(false)}
+                   onClick={() => handleFeatureClick(features[2])}
                    style={{
                 background: 'rgba(255, 255, 255, 0.9)',
                 backdropFilter: 'blur(20px)',
@@ -126,9 +317,10 @@ export default function Home() {
           {/* Performance Tracking - Premium Enhanced */}
           <div className="absolute inset-0 animate-[orbit_60s_linear_infinite]" style={{ animationDelay: '-45s', animationPlayState: isAnyCardHovered ? 'paused' : 'running' }}>
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[orbit_60s_linear_infinite_reverse]" style={{ animationDelay: '-45s', animationPlayState: isAnyCardHovered ? 'paused' : 'running' }}>
-              <div className="group flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-500 hover:scale-105 pointer-events-auto" 
+              <div className="group flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-500 hover:scale-105 pointer-events-auto cursor-pointer" 
                    onMouseEnter={() => handleCardHover(true)}
                    onMouseLeave={() => handleCardHover(false)}
+                   onClick={() => handleFeatureClick(features[3])}
                    style={{
                 background: 'rgba(255, 255, 255, 0.9)',
                 backdropFilter: 'blur(20px)',
@@ -158,9 +350,10 @@ export default function Home() {
           {/* Mock Tests - Premium Enhanced */}
           <div className="absolute inset-0 animate-[orbit_60s_linear_infinite]" style={{ animationDelay: '-54s', animationPlayState: isAnyCardHovered ? 'paused' : 'running' }}>
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[orbit_60s_linear_infinite_reverse]" style={{ animationDelay: '-54s', animationPlayState: isAnyCardHovered ? 'paused' : 'running' }}>
-              <div className="group flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-500 hover:scale-105 pointer-events-auto" 
+              <div className="group flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-500 hover:scale-105 pointer-events-auto cursor-pointer" 
                    onMouseEnter={() => handleCardHover(true)}
                    onMouseLeave={() => handleCardHover(false)}
+                   onClick={() => handleFeatureClick(features[4])}
                    style={{
                 background: 'rgba(255, 255, 255, 0.9)',
                 backdropFilter: 'blur(20px)',
@@ -395,6 +588,13 @@ export default function Home() {
           />
         </div>
       </div>
+
+      {/* Feature Modal */}
+      <FeatureModal
+        feature={selectedFeature}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 }
